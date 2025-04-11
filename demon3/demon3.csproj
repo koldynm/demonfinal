@@ -9,10 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MySql.Data" Version="9.2.0" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Remove="resources\A123B456C7.png" />
       <Content Include="resources\A123B456C7.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -49,6 +45,10 @@
       <Content Include="resources\picture.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MySql.Data" Version="9.2.0" />
     </ItemGroup>
 
 </Project>
