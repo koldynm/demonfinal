@@ -32,7 +32,7 @@ public partial class MainWindow : Window
         {
             if (string.IsNullOrWhiteSpace(dbdb.Photo)) 
             { 
-                dbdb.Photo = defaultImgage; 
+                dbdb.Photo = defaultImage; 
             }
             else
             {
