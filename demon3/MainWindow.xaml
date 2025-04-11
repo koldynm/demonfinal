@@ -5,36 +5,123 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:demon3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-            <ListBox x:Name="imia" Width="800">
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="{x:Type local:Item}">
-                        <Border BorderThickness="2" BorderBrush="Black">
-                            <Grid  Width="800">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Border BorderThickness="2" BorderBrush="Black">
-                                     <Image Source="{Binding Photo}"/>
-                                </Border>
-                                <Border Grid.Column="1" BorderThickness="2" BorderBrush="Black">
-                                     <StackPanel>
-                                        <TextBlock Text="{Binding Name, StringFormat='Наименование товара: {0}'}"/>
-                                        <TextBlock Text="{Binding Category, StringFormat='Категория товара: {0}'}"/>
-                                        <TextBlock Text="{Binding description, StringFormat='Описание товара: {0}'}"/>
-                                        <TextBlock Text="{Binding price, StringFormat='Цена товара: {0}'}"/>
-                                    </StackPanel>
-                                </Border>
-                                <Border Grid.Column="2" BorderThickness="2" BorderBrush="Black">
-                                    <TextBlock Text="{Binding discount}"/>
-                                </Border>
-                            </Grid>
+        Title="Каталог офисных товаров" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#FFF5F5F5">
+    
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0 5 0 5"/>
+            <Setter Property="Foreground" Value="#FF333333"/>
+        </Style>
+        
+        <Style TargetType="ListBox">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+        
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="border" Background="White" CornerRadius="8" Margin="0 5 0 5">
+                            <ContentPresenter/>
                         </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FFF0F7FF"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FFE1F0FF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Заголовок -->
+        <Border Grid.Row="0" Background="#FF4285F4" Padding="15" Margin="0 0 0 10">
+            <TextBlock Text="Каталог офисных товаров" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+        </Border>
+        
+        <!-- Список товаров -->
+        <ListBox x:Name="imia" Grid.Row="1" Width="850">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:Item}">
+                    <Grid Width="800" Margin="0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Изображение товара -->
+                        <Border BorderBrush="#FFE0E0E0" Margin="5">
+                            <Image Source="{Binding Photo}" Stretch="Uniform" Height="120"/>
+                        </Border>
+                        
+                        <!-- Информация о товаре -->
+                        <Border Grid.Column="1" BorderBrush="#FFE0E0E0" Margin="5">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" 
+                                           FontSize="16" 
+                                           FontWeight="Bold"
+                                           Foreground="#FF4285F4"/>
+                                
+                                <TextBlock Text="{Binding Category, StringFormat='Категория: {0}'}"/>
+                                <TextBlock Text="{Binding description}" 
+                                           TextWrapping="Wrap"
+                                           FontStyle="Italic"
+                                           Foreground="#FF666666"/>
+                                <TextBlock Text="{Binding price, StringFormat='Цена: {0}₽'}" 
+                                           FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- Скидка -->
+                        <Border Grid.Column="2" BorderBrush="#FFE0E0E0" Margin="5">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock Text="Скидка" 
+                                           HorizontalAlignment="Center"
+                                           FontSize="12"
+                                           Foreground="#FF757575"/>
+                                <TextBlock Text="{Binding discount, StringFormat=' {0}%'}" 
+                                           FontSize="24"
+                                           FontWeight="Bold"
+                                           Foreground="#FF34A853"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
