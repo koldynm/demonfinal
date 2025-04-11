@@ -1,0 +1,40 @@
+﻿<Window x:Class="demon3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demon3"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+            <ListBox x:Name="imia" Width="800">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:Item}">
+                        <Border BorderThickness="2" BorderBrush="Black">
+                            <Grid  Width="800">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border BorderThickness="2" BorderBrush="Black">
+                                     <Image Source="{Binding Photo}"/>
+                                </Border>
+                                <Border Grid.Column="1" BorderThickness="2" BorderBrush="Black">
+                                     <StackPanel>
+                                        <TextBlock Text="{Binding Name, StringFormat='Наименование товара: {0}'}"/>
+                                        <TextBlock Text="{Binding Category, StringFormat='Категория товара: {0}'}"/>
+                                        <TextBlock Text="{Binding description, StringFormat='Описание товара: {0}'}"/>
+                                        <TextBlock Text="{Binding price, StringFormat='Цена товара: {0}'}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Column="2" BorderThickness="2" BorderBrush="Black">
+                                    <TextBlock Text="{Binding discount}"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+    </Grid>
+</Window>
